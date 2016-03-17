@@ -2,9 +2,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"monospace:size=10"
+	"Droid Sans Mono:size=10"
 };
-static const char dmenufont[]       = "monospace:size=10";
+static const char dmenufont[]       = "Droid Sans Mono:size=10";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
@@ -20,10 +20,11 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 #define NUMCOLORS         4
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
   // border   foreground background
+  { "#282a2e", "#81a2be", "#282a2e" }, // A = blue on darkgrey
   { "#000033", "#dddddd", "#000033" },  // normal
   { "#000088", "#ffffff", "#000088" },  // selected
   { "#ff0000", "#000000", "#ffff00" },  // urgent/warning  (black on yellow)
-  { "#ff0000", "#ffffff", "#ff0000" },  // error (white on red)
+//  { "#ff0000", "#ffffff", "#ff0000" },  // error (white on red)
   // add more here
 };
 
@@ -37,6 +38,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "android-studio",     NULL,       NULL,       0,            1,           -1 },
 	// { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
@@ -67,13 +69,19 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "gnome-terminal", NULL };
-static const char *brightness_up[]  = { "xbacklight", "-inc", "10", NULL };
-static const char *brightness_down[]  = { "xbacklight", "-dec", "10", NULL };
+static const char *browsercmd[]  = { "chromium", NULL };
+static const char *editorcmd[]  = { "atom", NULL };
+static const char *brightness_up[]  = { "xbacklight", "-inc", "5", NULL };
+static const char *brightness_down[]  = { "xbacklight", "-dec", "5", NULL };
+static const char *volume_up[]  = { "sh", "-c", "pactl set-sink-mute 1 false ; pactl set-sink-volume 1 +5%", NULL };
+static const char *volume_down[]  = { "sh", "-c", "pactl set-sink-mute 1 false ; pactl set-sink-volume 1 -5%", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = editorcmd } },
+	{ MODKEY|ControlMask,           XK_Return, spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -106,8 +114,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	// For brightness
-	{ MODKEY,                       XK_Up,      spawn,         {.v = brightness_up } },
-	{ MODKEY,                       XK_Down,    spawn,         {.v = brightness_down } },
+	{ MODKEY,                       XK_Up,     spawn,          {.v = brightness_up } },
+	{ MODKEY,                       XK_Down,   spawn,          {.v = brightness_down } },
+	// For volume
+	{ MODKEY,                       XK_Right,  spawn,          {.v = volume_up } },
+	{ MODKEY,                       XK_Left,   spawn,          {.v = volume_down } },
 };
 
 /* button definitions */
