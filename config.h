@@ -68,8 +68,8 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "gnome-terminal", NULL };
-static const char *browsercmd[]  = { "chromium", NULL };
+static const char *termcmd[]  = { "gnome-terminal", "-e", "tmux", NULL };
+static const char *browsercmd[]  = { "firefox", NULL };
 static const char *editorcmd[]  = { "atom", NULL };
 static const char *brightness_up[]  = { "xbacklight", "-inc", "5", NULL };
 static const char *brightness_down[]  = { "xbacklight", "-dec", "5", NULL };
