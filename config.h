@@ -2,9 +2,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"Droid Sans Mono:size=10"
+	"Fixed SemiCondensed:size=10"
 };
-static const char dmenufont[]       = "Droid Sans Mono:size=10";
+static const char dmenufont[]       = "Fixed SemiCondensed:size=10";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
@@ -69,8 +69,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "gnome-terminal", "-e", "tmux", NULL };
-static const char *browsercmd[]  = { "firefox", NULL };
-static const char *editorcmd[]  = { "atom", NULL };
+static const char *browsercmd[]  = { "chromium", NULL };
+static const char *editorcmd[]  = { "gnome-terminal", "-e", "vim", NULL };
 static const char *brightness_up[]  = { "xbacklight", "-inc", "5", NULL };
 static const char *brightness_down[]  = { "xbacklight", "-dec", "5", NULL };
 static const char *volume_up[]  = { "sh", "-c", "pactl set-sink-mute 1 false ; pactl set-sink-volume 1 +5%", NULL };
