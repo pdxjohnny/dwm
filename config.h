@@ -2,9 +2,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"Droid Sans Mono:size=10"
+	"Fixed SemiCondensed:size=10"
 };
-static const char dmenufont[]       = "Droid Sans Mono:size=10";
+static const char dmenufont[]       = "Fixed SemiCondensed:size=10";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
